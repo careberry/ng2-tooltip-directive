@@ -10,10 +10,11 @@
     "test": "ng test"
   },
   "dependencies": {
+    "@amin-karimi/ng2-tooltip-directive": "^1.0.0",
     "@angular/animations": "^14.1.0",
     "@angular/common": "^14.2.12",
-    "@angular/core": "^14.1.0",
     "@angular/compiler": "^14.1.0",
+    "@angular/core": "^14.1.0",
     "@angular/forms": "^14.1.0",
     "@angular/platform-browser": "^14.1.0",
     "@angular/platform-browser-dynamic": "^14.1.0",
