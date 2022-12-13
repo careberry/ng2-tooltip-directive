@@ -13,7 +13,7 @@
     "downlevelIteration": true,
     "paths": {
       "ng2-tooltip-directive": [
-        "dist/ng2-tooltip"
+        "dist/ng2-tooltip-directive"
       ]
     },
     "experimentalDecorators": true,
