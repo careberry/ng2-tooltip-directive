@@ -1,6 +1,6 @@
 {
   "name": "@amin-karimi/ng2-tooltip-directive",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "peerDependencies": {
     "@angular/common": "^14.2.0",
     "@angular/core": "^14.2.0"
