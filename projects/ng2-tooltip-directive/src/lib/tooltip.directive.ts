@@ -23,7 +23,7 @@ export class TooltipDirective {
     hideAfterClickTimeoutId!: number;
     createTimeoutId!: number;
     showTimeoutId!: number;
-    componentRef: ComponentRef<TooltipComponent>;
+    componentRef: ComponentRef<TooltipComponent> | any;
     elementPosition: any;
     _id: any;
     _options: any = {};
@@ -176,7 +176,7 @@ export class TooltipDirective {
 
     @Input('hideDelayAfterClick') hideDelayAfterClick!: number;
     @Input('pointerEvents') pointerEvents!: 'auto' | 'none';
-    @Input('position') position!: {top: number, left: number};
+    @Input('position') position!: { top: number, left: number };
 
     get isTooltipDestroyed() {
         return this.componentRef && this.componentRef.hostView.destroyed;
@@ -201,18 +201,18 @@ export class TooltipDirective {
         }
     }
 
-    @Output() events: EventEmitter < any > = new EventEmitter < any > ();
+    @Output() events: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
-        @Optional() @Inject(TooltipOptionsService) private initOptions:any,
+        @Optional() @Inject(TooltipOptionsService) private initOptions: any,
         private elementRef: ElementRef,
         private componentFactoryResolver: ViewContainerRef,
         private appRef: ApplicationRef,
-        private injector: Injector) {}
+        private injector: Injector) { }
 
     // @HostListener('focusin' , ["$event"])
-    @HostListener('mouseenter' , ["$event"])
-    onMouseEnter(target) {
+    @HostListener('mouseenter', ["$event"])
+    onMouseEnter(target: any) {
         if (this.isDisplayOnHover == false) {
             return;
         }
@@ -233,7 +233,7 @@ export class TooltipDirective {
             this.componentRef.destroy();
             return;
         }
-        
+
         this.show();
         this.hideAfterClickTimeoutId = window.setTimeout(() => {
             this.destroyTooltip();
@@ -272,16 +272,16 @@ export class TooltipDirective {
         return this.isTouchScreen ? hideDelayTouchscreen : hideDelay;
     }
 
-    getProperties(changes: SimpleChanges){
-        let directiveProperties:any = {};
-        let customProperties:any = {};
-        let allProperties:any = {};
+    getProperties(changes: SimpleChanges) {
+        let directiveProperties: any = {};
+        let customProperties: any = {};
+        let allProperties: any = {};
 
         for (var prop in changes) {
-            if (prop !== 'options' && prop !== 'tooltipValue'){
+            if (prop !== 'options' && prop !== 'tooltipValue') {
                 directiveProperties[prop] = changes[prop].currentValue;
             }
-            if (prop === 'options'){
+            if (prop === 'options') {
                 customProperties = changes[prop].currentValue;
             }
         }
@@ -290,7 +290,7 @@ export class TooltipDirective {
         return allProperties;
     }
 
-    renameProperties(options:any) {
+    renameProperties(options: any) {
         for (var prop in options) {
             if (backwardCompatibilityOptions[prop]) {
                 options[backwardCompatibilityOptions[prop]] = options[prop];
@@ -336,7 +336,7 @@ export class TooltipDirective {
                 // this.appRef.detachView(this.componentRef.hostView);
                 this.componentRef.destroy();
                 this.events.emit({
-                    type: 'hidden', 
+                    type: 'hidden',
                     position: this.tooltipPosition
                 });
             }, options.fast ? 0 : this.destroyDelay);
@@ -345,7 +345,7 @@ export class TooltipDirective {
 
     showTooltipElem(): void {
         this.clearTimeouts();
-         this.componentRef.instance.show = true;
+        this.componentRef.instance.show = true;
         this.events.emit({
             type: 'show',
             position: this.tooltipPosition
@@ -365,20 +365,20 @@ export class TooltipDirective {
 
     appendComponentToBody(component: any, data: any = {}): void {
         this.componentRef = this.componentFactoryResolver.createComponent<any>(component)
-            // .resolveComponentFactory(component)
-            // .create(this.injector);
+        // .resolveComponentFactory(component)
+        // .create(this.injector);
 
-         this.componentRef.instance.data = {
+        this.componentRef.instance.data = {
             value: this.tooltipValue,
             element: this.elementRef.nativeElement,
             elementPosition: this.tooltipPosition,
             options: this.options
         }
         // this.appRef.attachView(this.componentRef.hostView);
-        const domElem = (this.componentRef.hostView as EmbeddedViewRef < any > ).rootNodes[0] as HTMLElement;
+        const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
         document.body.appendChild(domElem);
 
-        this.componentSubscribe =  this.componentRef.instance.events.subscribe((event: any) => {
+        this.componentSubscribe = this.componentRef.instance.events.subscribe((event: any) => {
             this.handleEvents(event);
         });
     }
@@ -435,7 +435,7 @@ export class TooltipDirective {
 
     get isTouchScreen() {
         var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
-        var mq = function(query:any) {
+        var mq = function (query: any) {
             return window.matchMedia(query).matches;
         }
 
@@ -449,7 +449,7 @@ export class TooltipDirective {
         return mq(query);
     }
 
-    applyOptionsDefault(defaultOptions:any, options:any): void {
+    applyOptionsDefault(defaultOptions: any, options: any): void {
         this.options = Object.assign({}, defaultOptions, this.initOptions || {}, this.options, options);
     }
 
