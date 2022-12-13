@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, ComponentFactoryResolver, EmbeddedViewRef, ApplicationRef, Injector, ComponentRef, OnInit, Output, EventEmitter, OnDestroy, Inject, Optional, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, ViewContainerRef, EmbeddedViewRef, ApplicationRef, Injector, ComponentRef, OnInit, Output, EventEmitter, OnDestroy, Inject, Optional, SimpleChanges } from '@angular/core';
 import { TooltipComponent } from './tooltip.component';
 import { TooltipOptionsService } from './options.service';
 import { defaultOptions, backwardCompatibilityOptions } from './options';
@@ -23,7 +23,7 @@ export class TooltipDirective {
     hideAfterClickTimeoutId!: number;
     createTimeoutId!: number;
     showTimeoutId!: number;
-    componentRef: any;
+    componentRef: ComponentRef<TooltipComponent>;
     elementPosition: any;
     _id: any;
     _options: any = {};
@@ -39,6 +39,7 @@ export class TooltipDirective {
     _maxWidth!: string;
 
     @Input('options') set options(value: TooltipOptions) {
+
         if (value && defaultOptions) {
             this._options = value;
         }
@@ -205,21 +206,20 @@ export class TooltipDirective {
     constructor(
         @Optional() @Inject(TooltipOptionsService) private initOptions:any,
         private elementRef: ElementRef,
-        private componentFactoryResolver: ComponentFactoryResolver,
+        private componentFactoryResolver: ViewContainerRef,
         private appRef: ApplicationRef,
         private injector: Injector) {}
 
-    @HostListener('focusin')
-    @HostListener('mouseenter')
-    onMouseEnter() {
+    // @HostListener('focusin' , ["$event"])
+    @HostListener('mouseenter' , ["$event"])
+    onMouseEnter(target) {
         if (this.isDisplayOnHover == false) {
             return;
         }
-
         this.show();
     }
 
-    @HostListener('focusout')
+    // @HostListener('focusout')
     @HostListener('mouseleave')
     onMouseLeave() {
         if (this.options['trigger'] === 'hover') {
@@ -230,9 +230,10 @@ export class TooltipDirective {
     @HostListener('click')
     onClick() {
         if (this.isDisplayOnClick == false) {
+            this.componentRef.destroy();
             return;
         }
-
+        
         this.show();
         this.hideAfterClickTimeoutId = window.setTimeout(() => {
             this.destroyTooltip();
@@ -332,7 +333,7 @@ export class TooltipDirective {
                     return;
                 }
 
-                this.appRef.detachView(this.componentRef.hostView);
+                // this.appRef.detachView(this.componentRef.hostView);
                 this.componentRef.destroy();
                 this.events.emit({
                     type: 'hidden', 
@@ -344,7 +345,7 @@ export class TooltipDirective {
 
     showTooltipElem(): void {
         this.clearTimeouts();
-        ( < AdComponent > this.componentRef.instance).show = true;
+         this.componentRef.instance.show = true;
         this.events.emit({
             type: 'show',
             position: this.tooltipPosition
@@ -355,7 +356,7 @@ export class TooltipDirective {
         if (!this.componentRef || this.isTooltipDestroyed) {
             return;
         }
-        ( < AdComponent > this.componentRef.instance).show = false;
+        this.componentRef.instance.show = false;
         this.events.emit({
             type: 'hide',
             position: this.tooltipPosition
@@ -363,21 +364,21 @@ export class TooltipDirective {
     }
 
     appendComponentToBody(component: any, data: any = {}): void {
-        this.componentRef = this.componentFactoryResolver
-            .resolveComponentFactory(component)
-            .create(this.injector);
+        this.componentRef = this.componentFactoryResolver.createComponent<any>(component)
+            // .resolveComponentFactory(component)
+            // .create(this.injector);
 
-        ( < AdComponent > this.componentRef.instance).data = {
+         this.componentRef.instance.data = {
             value: this.tooltipValue,
             element: this.elementRef.nativeElement,
             elementPosition: this.tooltipPosition,
             options: this.options
         }
-        this.appRef.attachView(this.componentRef.hostView);
+        // this.appRef.attachView(this.componentRef.hostView);
         const domElem = (this.componentRef.hostView as EmbeddedViewRef < any > ).rootNodes[0] as HTMLElement;
         document.body.appendChild(domElem);
 
-        this.componentSubscribe = ( < AdComponent > this.componentRef.instance).events.subscribe((event: any) => {
+        this.componentSubscribe =  this.componentRef.instance.events.subscribe((event: any) => {
             this.handleEvents(event);
         });
     }
