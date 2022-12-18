@@ -1,6 +1,6 @@
 {
   "name": "@amin-karimi/ng2-tooltip-directive",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Tooltip for Angular",
   "repository": {
     "type": "git",
@@ -13,20 +13,22 @@
   "keywords": [
     "Angular",
     "Angular 14",
+    "Angular 15",
     "ng2",
     "ngx",
     "tooltip",
     "popover",
-    "tooltip angular 14"
+    "tooltip angular 14",
+    "ng2-tooltip-directive"
   ],
   "homepage": "http://ivylab.space/tooltip",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/drozhzhin-n-e/ng2-tooltip-directive/issues"
+    "url": "https://github.com/Amin-Karimi/ng2-tooltip-directive/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0"
+    "@angular/common": "^15.0.4",
+    "@angular/core": "^15.0.4"
   },
   "dependencies": {
     "tslib": "^2.3.0"
