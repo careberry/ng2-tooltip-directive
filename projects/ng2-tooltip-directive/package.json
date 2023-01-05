@@ -1,36 +1,36 @@
 {
-  "name": "@amin-karimi/ng2-tooltip-directive",
-  "version": "2.0.0",
-  "description": "Tooltip for Angular",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Amin-Karimi/ng2-tooltip-directive.git"
-  },
-  "author": {
-    "name": "Nikita Drozhzhin",
-    "email": "drozhzhin.n.e@gmail.com"
-  },
-  "keywords": [
-    "Angular",
-    "Angular 14",
-    "Angular 15",
-    "ng2",
-    "ngx",
-    "tooltip",
-    "popover",
-    "tooltip angular 14",
-    "ng2-tooltip-directive"
-  ],
-  "homepage": "http://ivylab.space/tooltip",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Amin-Karimi/ng2-tooltip-directive/issues"
-  },
-  "peerDependencies": {
-    "@angular/common": "^15.0.4",
-    "@angular/core": "^15.0.4"
-  },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  }
+    "name": "@amin-karimi/ng2-tooltip-directive",
+    "version": "2.0.1",
+    "description": "Tooltip for Angular",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Amin-Karimi/ng2-tooltip-directive.git"
+    },
+    "author": {
+        "name": "Nikita Drozhzhin",
+        "email": "drozhzhin.n.e@gmail.com"
+    },
+    "keywords": [
+        "Angular",
+        "Angular 14",
+        "Angular 15",
+        "ng2",
+        "ngx",
+        "tooltip",
+        "popover",
+        "tooltip angular 14",
+        "ng2-tooltip-directive"
+    ],
+    "homepage": "http://ivylab.space/tooltip",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Amin-Karimi/ng2-tooltip-directive/issues"
+    },
+    "peerDependencies": {
+        "@angular/common": "^15.0.4",
+        "@angular/core": "^15.0.4"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    }
 }
