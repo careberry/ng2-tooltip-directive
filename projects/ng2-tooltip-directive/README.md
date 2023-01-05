@@ -4,7 +4,7 @@
 [V1.0.3](https://www.npmjs.com/package/@amin-karimi/ng2-tooltip-directive/v/1.0.3) for Angular 14.2
 
 
-[V2.0.0](https://www.npmjs.com/package/@amin-karimi/ng2-tooltip-directive/v/2.0.0) for Angular 15.0.4
+[V2.0.1](https://www.npmjs.com/package/@amin-karimi/ng2-tooltip-directive/v/2.0.1) for Angular 15.0.4
 
 
 
