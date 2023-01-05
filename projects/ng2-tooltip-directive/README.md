@@ -1,5 +1,12 @@
 # Tooltip for Angular
-This library was generated with Angular CLI version 14.2.0.
+
+
+[V1.0.3](https://www.npmjs.com/package/@amin-karimi/ng2-tooltip-directive/v/1.0.3) for Angular 14.2
+
+
+[V2.0.1](https://www.npmjs.com/package/@amin-karimi/ng2-tooltip-directive/v/2.0.1) for Angular 15.0.4
+
+
 
 
 [![Build Status](https://travis-ci.org/drozhzhin-n-e/ng2-tooltip-directive.svg?branch=master)](https://travis-ci.org/drozhzhin-n-e/ng2-tooltip-directive) <img src="https://badgen.net/bundlephobia/min/ng2-tooltip-directive" />
